@@ -1,12 +1,5 @@
-//
-//  AppDelegate.m
-//  NSURLSessionDemystifier
-//
-//  Created by Dennis Schmidt on 2/27/15.
-//  Copyright (c) 2015 SoundCloud. All rights reserved.
-//
-
 #import "AppDelegate.h"
+#import "DownloadService.h"
 
 @interface AppDelegate ()
 
@@ -14,6 +7,12 @@
 
 @implementation AppDelegate
 
+- (void)                application:(UIApplication *)application
+handleEventsForBackgroundURLSession:(NSString *)identifier
+                  completionHandler:(void (^)())completionHandler {
+    NSLog(@"handleEventsForBackgroundURLSession: %@", identifier);
+    [DownloadService sharedInstance].completionHandler = completionHandler;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
